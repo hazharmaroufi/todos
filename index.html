@@ -6,7 +6,49 @@
     <title>TODOS</title>
   </head>
   <body>
-    <div id="app"></div>
+    <form id="form" action="" class="m-4">
+      <input
+        class="border border-gray-300 rounded p-1"
+        type="text"
+        id="title"
+        name="title"
+        placeholder="title"
+      />
+      <br />
+      <textarea
+        class="border border-gray-300 rounded p-1 mt-4"
+        id="description"
+        name="description"
+        rows="4"
+        placeholder="description"
+      ></textarea
+      ><br />
+      <input
+        class="border border-gray-300 rounded p-1 mt-4"
+        type="date"
+        id="dueDate"
+        name="dueDate"
+        placeholder="dueDate"
+      /><br />
+      <select
+        id="priority"
+        name="priority"
+        class="border border-gray-300 rounded p-1 mt-4"
+      >
+        <option value="low">Low</option>
+        <option value="high">High</option>
+      </select>
+      <br />
+      <button
+        class="border border-gray-300 rounded px-8 py-1 mt-4 bg-gray-300"
+        id="sub"
+        type="submit"
+      >
+        Add Task
+      </button>
+    </form>
+    <hr />
+    <div class="tasks m-4 "></div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
