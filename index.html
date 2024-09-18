@@ -48,6 +48,17 @@
       </button>
     </form>
     <hr />
+    <div id="editForm" style="display: none;">
+      <input class="border mb-2 ml-4 mt-4" type="text" id="editTitle" placeholder="New Title">   <br>
+      <input class="border mb-2 ml-4" type="text" id="editDescription" placeholder="New Description">   <br>
+      <input class="border mb-2 ml-4" type="date" id="editDueDate" placeholder="New Due Date">   <br>
+      <select class="border mb-2 ml-4" id="editPriority">
+        <option value="low">Low</option>
+        <option value="high">High</option>
+      </select><br>
+      <button class="border bg-green-200 py-1 px-5 m-2 rounded" id="saveEdit">update</button>
+    </div>
+    <hr />
     <div class="tasks m-4 "></div>
     <script type="module" src="/main.js"></script>
   </body>

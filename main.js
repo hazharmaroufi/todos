@@ -29,8 +29,7 @@ document.getElementById("sub").addEventListener("click", function (event) {
     localStorage.setItem("localTask", JSON.stringify(tasks));
     taskShow();
     reloadPage()
-    // readTaskIds()
-    // readpriorityIds()
+
 })
 
 localStorage.setItem("localTask", JSON.stringify(tasks));
@@ -84,14 +83,10 @@ function removeTask() {
         taskId.addEventListener("click", function (event) {
     const taskId = event.target.dataset.id;
     tasks.splice(taskId, 1);
-    // localStorage.clear();
     console.log(taskId.title)
     localStorage.setItem("localTask", JSON.stringify(tasks));
     taskShow();
     reloadPage()
-    // showTaskIds()
-    // readpriorityIds()
-    // removeTask()
   });
 })}
 function editTask() {
@@ -99,13 +94,26 @@ function editTask() {
     editTaskId.forEach(taskId => {
         taskId.addEventListener("click", function (event) {
             const taskId = event.target.dataset.id;
-            console.log(tasks[taskId])
-            reloadPage()
-            localStorage.setItem("taskForEdit", JSON.stringify(tasks[taskId]));
-            // taskShow();
-            // showTaskIds()
-            // readpriorityIds()
-            // removeTask()
+            const task = tasks[taskId];
+
+            document.getElementById('editForm').style.display = "block";
+            document.getElementById('editTitle').value = task.title;
+            document.getElementById('editDescription').value = task.description;
+            document.getElementById('editDueDate').value = task.dueDate;
+            document.getElementById('editPriority').value = task.priority;
+
+            document.getElementById('saveEdit').onclick = function () {
+                task.title = document.getElementById('editTitle').value;
+                task.description = document.getElementById('editDescription').value;
+                task.dueDate = document.getElementById('editDueDate').value;
+                task.priority = document.getElementById('editPriority').value;
+
+                tasks[taskId]=task;
+                localStorage.setItem("localTask", JSON.stringify(tasks));
+         
+                reloadPage()
+                document.getElementById("editForm").style.display = "none";
+            }
         });
     })}
 
@@ -114,9 +122,7 @@ function readTaskIds() {
     toogleDone.forEach(taskIds => {
         taskIds.addEventListener("click", function (event) {
             taskShow();
-          // showTaskIds()
-          //   readpriorityIds()
-          // removeTask()
+
         });
     })
 }
@@ -131,9 +137,6 @@ function readpriorityIds() {
             localStorage.setItem("localTask", JSON.stringify(tasks));
             taskShow();
             reloadPage()
-          // showTaskIds()
-          //   readpriorityIds()
-          // removeTask()
         });
     })
 }
