@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODOS</title>
+    <script type="module" crossorigin src="/assets/index-DkIYh6GJ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-ChasyqWl.css">
+  </head>
+  <body>
+    <form id="form" action="" class="m-4">
+      <input
+        class="border border-gray-300 rounded p-1"
+        type="text"
+        id="title"
+        name="title"
+        placeholder="title"
+      />
+      <br />
+      <textarea
+        class="border border-gray-300 rounded p-1 mt-4"
+        id="description"
+        name="description"
+        rows="4"
+        placeholder="description"
+      ></textarea
+      ><br />
+      <input
+        class="border border-gray-300 rounded p-1 mt-4"
+        type="date"
+        id="dueDate"
+        name="dueDate"
+        placeholder="dueDate"
+      /><br />
+      <select
+        id="priority"
+        name="priority"
+        class="border border-gray-300 rounded p-1 mt-4"
+      >
+        <option value="low">Low</option>
+        <option value="high">High</option>
+      </select>
+      <br />
+      <input
+      class="border border-gray-300 rounded p-1 mt-4"
+      type="text"
+      id="list"
+      name="list"
+      placeholder="default"
+    /><br /><button
+        class="border border-gray-300 rounded px-8 py-1 mt-4 bg-gray-300"
+        id="sub"
+        type="submit"
+      >
+        Add Task
+      </button>
+    </form>
+    <hr />
+    <div id="editForm" style="display: none;">
+      <input class="border mb-2 ml-4 mt-4" type="text" id="editTitle" placeholder="New Title">   <br>
+      <input class="border mb-2 ml-4" type="text" id="editDescription" placeholder="New Description">   <br>
+      <input class="border mb-2 ml-4" type="date" id="editDueDate" placeholder="New Due Date">   <br>
+      <select class="border mb-2 ml-4" id="editPriority">
+        <option value="low">Low</option>
+        <option value="high">High</option>
+      </select><br>
+      <input class="border mb-2 ml-4" type="text" id="editList" placeholder="New list">   <br>
+      <button class="border bg-green-200 py-1 px-5 m-2 rounded" id="saveEdit">update</button>
+    </div>
+    <hr />
+    <div class="lists m-4 "></div>
+    <div class="tasks m-4 "></div>
+  </body>
+</html>
