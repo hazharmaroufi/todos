@@ -1,5 +1,5 @@
 import './style.css'
-
+let selectedList = "default";
 class Task {
     constructor(title, description, dueDate, priority, list) {
         this.title = title;
@@ -14,8 +14,8 @@ class Task {
 let tasks = JSON.parse(localStorage.getItem("localTask")) || [];
 
 
-const tasktoList = (title, description, dueDate, priority) => {
-    const newTask = new Task(title, description, dueDate, priority, "default", false);
+const tasktoList = (title, description, dueDate, priority, list) => {
+    const newTask = new Task(title, description, dueDate, priority, list , false);
     tasks.push(newTask);
 }
 document.getElementById("sub").addEventListener("click", function (event) {
@@ -24,7 +24,8 @@ document.getElementById("sub").addEventListener("click", function (event) {
     let description = document.getElementById('description').value;
     let dueDate = document.getElementById('dueDate').value;
     let priority = document.getElementById('priority').value;
-    tasktoList(title, description, dueDate, priority);
+    let list = (document.getElementById('list').value || "default");
+    tasktoList(title, description, dueDate, priority,list);
     console.log(tasks);
     localStorage.setItem("localTask", JSON.stringify(tasks));
     taskShow();
@@ -35,21 +36,48 @@ document.getElementById("sub").addEventListener("click", function (event) {
 localStorage.setItem("localTask", JSON.stringify(tasks));
 let task = localStorage.getItem("localTask");
 task = JSON.parse(task);
+
 function reloadPage() {
     location.reload();
 }
 
 const taskShow = function () {
     let tasksShow = document.querySelector(".tasks");
+    let listShow = document.querySelector(".lists");
+
+    listShow.innerHTML = "";
     tasksShow.innerHTML = "";
+    let listTasks = [...new Set(tasks.map(task => task.list))];
+   for (let i = listTasks.length - 1; i >= 0; i--) {
+   listShow.innerHTML += `
+    <ul>
+   <li style="margin-left: 1rem"  class="hidden " data-id="${i}"><button class="listselection">${listTasks[i]}</button></li>
+    </ul>
+   `
+   }
+   let listSelections = document.querySelectorAll(".listselection");
+   listSelections.forEach(listSelection => {
+       listSelection.addEventListener("click", function (event) {
+     
+           selectedList = (event.target.textContent );
+           localStorage.setItem("selectedList", selectedList);
+
+           taskShow();
+           readTaskIds();
+           removeTask()
+           editTask();
+       });
+   });
     for (let i = tasks.length - 1; i >= 0; i--) {
 
+        if (tasks[i].list === selectedList){
         tasksShow.innerHTML += `
     <ul>
       <li data-id="${i}"><button id="doing" class="${i}">✔️</button>  task: ${tasks[i].title} </li>
       <li style="margin-left: 1rem" class="hidden idNumber" data-id="${i}">🗒️ description: ${tasks[i].description}</li>
       <li style="margin-left: 1rem"  class="hidden " data-id="${i}">⏰ due : ${tasks[i].dueDate}</li>
       <li style="margin-left: 1rem"  class="hidden " data-id="${i}">⭐️ priority: <button id="priority" class="${i}">${tasks[i].priority}</button></li>
+      <li style="margin-left: 1rem"  class="hidden " data-id="${i}">✏️ list : ${tasks[i].list}</li>
     <hr> 
     </ul>
     <button style="border: 1px solid gray; background-color: burlywood ; border-radius: 8px; padding: 4px 16px; margin: 8px" class="hidden done" data-id="${i}">Done</button> 
@@ -57,7 +85,7 @@ const taskShow = function () {
     `;
 
     }
-
+}
 
 }
 
@@ -101,12 +129,14 @@ function editTask() {
             document.getElementById('editDescription').value = task.description;
             document.getElementById('editDueDate').value = task.dueDate;
             document.getElementById('editPriority').value = task.priority;
+            document.getElementById('editList').value = task.list;
 
             document.getElementById('saveEdit').onclick = function () {
                 task.title = document.getElementById('editTitle').value;
                 task.description = document.getElementById('editDescription').value;
                 task.dueDate = document.getElementById('editDueDate').value;
                 task.priority = document.getElementById('editPriority').value;
+                task.list = document.getElementById('editList').value;
 
                 tasks[taskId]=task;
                 localStorage.setItem("localTask", JSON.stringify(tasks));

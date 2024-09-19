@@ -39,7 +39,13 @@
         <option value="high">High</option>
       </select>
       <br />
-      <button
+      <input
+      class="border border-gray-300 rounded p-1 mt-4"
+      type="text"
+      id="list"
+      name="list"
+      placeholder="default"
+    /><br /><button
         class="border border-gray-300 rounded px-8 py-1 mt-4 bg-gray-300"
         id="sub"
         type="submit"
@@ -56,9 +62,11 @@
         <option value="low">Low</option>
         <option value="high">High</option>
       </select><br>
+      <input class="border mb-2 ml-4" type="text" id="editList" placeholder="New list">   <br>
       <button class="border bg-green-200 py-1 px-5 m-2 rounded" id="saveEdit">update</button>
     </div>
     <hr />
+    <div class="lists m-4 "></div>
     <div class="tasks m-4 "></div>
     <script type="module" src="/main.js"></script>
   </body>
